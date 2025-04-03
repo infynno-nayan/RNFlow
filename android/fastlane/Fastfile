@@ -27,11 +27,10 @@ platform :android do
     )
     
     upload_to_play_store(
-      json_key: 'android/fastlane/playstore-credentials.json',
       track: 'internal',
       release_status: 'draft',
       skip_upload_apk: true
-      )
+    )
      
   end
 
