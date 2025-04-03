@@ -112,6 +112,10 @@ jobs:
       - name: Install Node.js dependencies
         run: npm install
 
+      - name: Restore Keystore File
+        run: |
+          echo "${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_JSON }}" | base64 --decode > android/app/my-upload-key.keystore
+
       - name: Install Fastlane
         run: sudo gem install fastlane -NV
 
