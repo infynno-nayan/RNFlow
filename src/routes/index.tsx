@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -7,7 +7,7 @@ import Home from '../screens/Home';
 
 const Stack = createNativeStackNavigator();
 
-const index = () => {
+const Index = () => {
   const insets = useSafeAreaInsets();
   return (
     <View style={[styles.container, {paddingTop: insets.top}]}>
@@ -26,4 +26,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default index;
+export default Index;

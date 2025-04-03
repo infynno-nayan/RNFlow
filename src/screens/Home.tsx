@@ -13,13 +13,8 @@ function Section({children, title}: any): React.JSX.Element {
 
 const Home = () => {
   return (
-    <ScrollView style={{flex: 1, backgroundColor: 'white'}}>
-      <View
-        style={{
-          backgroundColor: Colors.white,
-          paddingHorizontal: 10,
-          paddingBottom: 20,
-        }}>
+    <ScrollView style={styles.container}>
+      <View style={styles.child}>
         <Section title="Welcome to React Native">
           We have integrate <Text style={styles.highlight}>CI/CD Pipeline</Text>{' '}
           workflows with github and sync build upload on google play console
@@ -38,6 +33,14 @@ const Home = () => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'white',
+  },
+  child: {
+    paddingHorizontal: 10,
+    paddingBottom: 20,
+  },
   sectionContainer: {
     marginTop: 32,
     paddingHorizontal: 24,
