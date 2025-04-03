@@ -29,7 +29,7 @@ platform :android do
     upload_to_play_store(
       track: 'internal',
       # release_status: 'draft',
-      release_status: 'inReview',
+      release_status: 'completed',
       skip_upload_apk: true
       )
      
