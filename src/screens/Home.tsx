@@ -25,7 +25,7 @@ const Home = () => {
         <Section title="Third Party Library">Husky{'\n'}Fastlane</Section>
         <Section title="Github">
           Created a github action workflow to build and upload the app to google
-          play console. The workflow is triggered on push to the main branch
+          play console. The workflow is triggered on push to the main branch.
         </Section>
       </View>
     </ScrollView>
