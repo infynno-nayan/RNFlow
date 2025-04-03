@@ -17,7 +17,7 @@ const Home = () => {
       <View style={styles.child}>
         <Section title="Welcome to React Native">
           We have integrate <Text style={styles.highlight}>CI/CD Pipeline</Text>{' '}
-          workflows with github and sync build upload on google play console
+          workflows with github and sync build upload on google play console.
         </Section>
         <Section title="Requirement">
           Google cloud console{'\n'}Google play console
@@ -25,7 +25,7 @@ const Home = () => {
         <Section title="Third Party Library">Husky{'\n'}Fastlane</Section>
         <Section title="Github">
           Created a github action workflow to build and upload the app to google
-          play console. The workflow is triggered on push to the main branch.
+          play console. The workflow is triggered on push to the main branch
         </Section>
       </View>
     </ScrollView>
