@@ -121,7 +121,7 @@ jobs:
 
       - name: Deploy to Google Play Store
         run: |
-          echo "${{ secrets.PLAYSTORE_CREDENTIALS }}" > android/fastlane/playstore-credentials.json
+          # echo "${{ secrets.PLAYSTORE_CREDENTIALS }}" > android/fastlane/playstore-credentials.json
           cd android
           fastlane playstore
 
