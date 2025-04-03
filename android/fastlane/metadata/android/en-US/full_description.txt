@@ -1,0 +1,19 @@
+🚀 RNFlow – React Native CI/CD Made Easy!
+RNFlow is the ultimate CI/CD workflow automation tool for React Native developers. Whether you're a solo developer or part of a team, RNFlow helps you streamline the build, test, and deployment process effortlessly.
+
+🔥 Key Features:
+✅ Automated CI/CD Pipelines – Set up continuous integration and deployment in minutes.
+✅ Seamless React Native Builds – Supports Expo, React Native CLI, and EAS workflows.
+✅ Fast App Distribution – Deploy updates to Google Play, App Store, and internal testers.
+✅ Git Integration – Connect with GitHub, GitLab, or Bitbucket for automatic builds.
+✅ Real-Time Notifications – Stay updated with build status via Slack, email, or webhook alerts.
+✅ Custom Workflows – Define your own scripts, tests, and deployment strategies.
+
+💡 Why Choose RNFlow?
+🚀 Save Time – Automate repetitive tasks and focus on coding.
+
+🔥 Eliminate Manual Errors – Run tests and ensure high-quality releases.
+
+🌍 Collaborate Efficiently – Works with teams of all sizes for smoother deployments.
+
+Take your React Native development to the next level with RNFlow! Download now and simplify your app release process. 🚀
