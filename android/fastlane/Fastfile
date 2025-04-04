@@ -33,7 +33,7 @@ platform :android do
       track: 'internal',
       release_status: 'draft',
       skip_upload_apk: true,
-      json_key: './android/fastlane/playstore-credentials.json' # 👈 Correct path
+      json_key: './fastlane/playstore-credentials.json' # ✅ Correct Path
     )
   end
 
