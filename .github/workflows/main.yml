@@ -1,3 +1,8 @@
+# Build Upload Change line no.148
+# Upload on internal testing : fastlane internal
+# Upload on close testing : fastlane closed
+# Upload on production : fastlane production
+
 # Workflow Name
 name: React Native CI/CD Workflow
 
@@ -99,6 +104,16 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
+      - name: Build Android App
+        run: |
+          cd android
+          ./gradlew clean && cd ..
+          npm run build
+          rm -rf ./android/app/src/main/res/drawable-*
+          rm -rf ./android/app/src/main/res/raw
+          cd android
+          ./gradlew bundleRelease
+
       # 🛠️ Restore Keystore File
       - name: Restore Keystore File
         run: |
@@ -130,7 +145,7 @@ jobs:
       - name: Deploy to Google Play Store
         run: |
           cd android
-          fastlane playstore
+          fastlane closed
 
       - name: Send Discord Notification on Failure
         if: failure()

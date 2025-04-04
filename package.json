@@ -10,7 +10,8 @@
     "test": "jest",
     "format": "prettier --check src && prettier --write src",
     "lint:fix": "eslint src --fix ",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "build": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res"
   },
   "dependencies": {
     "@react-navigation/native": "^7.1.3",
