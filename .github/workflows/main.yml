@@ -111,8 +111,6 @@ jobs:
           npm run build
           rm -rf ./android/app/src/main/res/drawable-*
           rm -rf ./android/app/src/main/res/raw
-          cd android
-          ./gradlew bundleRelease
 
       # 🛠️ Restore Keystore File
       - name: Restore Keystore File
