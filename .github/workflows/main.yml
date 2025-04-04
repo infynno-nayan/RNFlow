@@ -17,7 +17,6 @@ on:
       - main
 
 jobs:
-  # 🛠️ Lint & Test Job
   lint-and-test:
     runs-on: ubuntu-latest
     steps:
@@ -75,8 +74,8 @@ jobs:
                -d '{"content": "✅ Testing Passed"}' \
                ${{ secrets.DISCORD_WEBHOOK_URL }}
 
-  # 🚀 Deployment Job
   deploy:
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     needs: lint-and-test
     steps:
@@ -113,20 +112,17 @@ jobs:
           rm -rf ./android/app/src/main/res/drawable-*
           rm -rf ./android/app/src/main/res/raw
 
-      # 🛠️ Restore Keystore File
       - name: Restore Keystore File
         run: |
           echo "${{ secrets.KEYSTORE_FILE }}" | base64 --decode > android/app/my-upload-key.keystore
           ls -la android/app/ | grep keystore || echo "❌ Keystore Not Found!"
 
-      # 🔑 Restore Google Play Credentials
       - name: Restore Play Store Credentials
         run: |
           mkdir -p android/fastlane
           echo "${{ secrets.PLAYSTORE_CREDENTIALS }}" | base64 --decode > android/fastlane/playstore-credentials.json
           ls -la android/fastlane/ | grep playstore-credentials.json || echo "❌ Play Store Credentials Not Found!"
 
-      # 📜 Debugging Step (Ensure Files Exist)
       - name: Debug Files Before Build
         run: |
           pwd
@@ -136,11 +132,9 @@ jobs:
           cat android/app/my-upload-key.keystore || echo "❌ Keystore Not Found!"
         # cat android/fastlane/playstore-credentials.json || echo "❌ Credentials File Not Found!"
 
-      # 📦 Install Fastlane
       - name: Install Fastlane
         run: sudo gem install fastlane -NV
 
-      # 🚀 Deploy to Google Play Store
       - name: Deploy to Google Play Store
         run: |
           cd android
