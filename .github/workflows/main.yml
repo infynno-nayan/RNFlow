@@ -11,7 +11,8 @@ on:
     branches:
       - main
   pull_request:
-    types: [closed]
+    types:
+      - closed
     branches:
       - main
 
@@ -76,7 +77,6 @@ jobs:
 
   # 🚀 Deployment Job
   deploy:
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     runs-on: ubuntu-latest
     needs: lint-and-test
     steps:
@@ -144,7 +144,7 @@ jobs:
       - name: Deploy to Google Play Store
         run: |
           cd android
-          fastlane closed
+          fastlane internal
 
       - name: Send Discord Notification on Failure
         if: failure()
