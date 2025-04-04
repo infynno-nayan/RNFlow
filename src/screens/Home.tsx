@@ -18,7 +18,7 @@ const Home = () => {
         <Section title="Welcome to React Native">
           We have integrate <Text style={styles.highlight}>CI/CD Pipeline</Text>{' '}
           workflows with github and sync build upload on google play console.
-          {'\n'}The app is built using React Native CLI
+          {'\n'}The app is built using React Native CLI...
         </Section>
         <Section title="Requirement">
           Google cloud console{'\n'}Google play console
