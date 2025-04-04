@@ -1,28 +1,9 @@
-# This file contains the fastlane.tools configuration
-# You can find the documentation at https://docs.fastlane.tools
-#
-# For a list of all available actions, check out
-#
-#     https://docs.fastlane.tools/actions
-#
-# For a list of all available plugins, check out
-#
-#     https://docs.fastlane.tools/plugins/available-plugins
-#
-
-# Uncomment the line if you want fastlane to automatically update itself
-# update_fastlane
-
 default_platform(:android)
 
 platform :android do
   desc "Deploy app on draft mode to the Play Store"
   lane :playstore do
-    # sh "pwd"  # 👈 Prints current working directory
-    # sh "ls -la android/fastlane/"  # 👈 Lists all files in android/fastlane/
-    # sh "cat android/fastlane/playstore-credentials.json || echo '❌ Credentials File Not Found!'"  # 👈 Verifies file content
-    
-    # increment_android_version_code
+    increment_android_version_code
   
     gradle(
       task: 'bundle',
@@ -31,53 +12,33 @@ platform :android do
   
     upload_to_play_store(
       track: 'internal',
-      release_status: 'draft',
+      release_status: 'completed',
       skip_upload_apk: true,
-      json_key: './fastlane/playstore-credentials.json' # ✅ Correct Path
+      json_key: './fastlane/playstore-credentials.json'
     )
   end
 
-  # lane :playstore do
-  #   # Increment version code
-  #   increment_android_version_code
-
-  #   gradle(
-  #     task: 'bundle',
-  #     build_type: 'Release'
-  #   )
-    
-  #   upload_to_play_store(
-  #     track: 'internal',
-  #     release_status: 'draft',
-  #     skip_upload_apk: true,
-  #     json_key: 'fastlane/playstore-credentials.json' # 👈 Add this
-  #   )
-     
-  # end
-
-  # private_lane :increment_android_version_code do
-  #   build_gradle_file = File.join(Dir.pwd, "../app/build.gradle")
+  private_lane :increment_android_version_code do
+    build_gradle_file = File.join(Dir.pwd, "../app/build.gradle")
   
-  #   unless File.exist?(build_gradle_file)
-  #     UI.user_error!("🚨 build.gradle file not found at: #{build_gradle_file}")
-  #   end
+    unless File.exist?(build_gradle_file)
+      UI.user_error!("🚨 build.gradle file not found at: #{build_gradle_file}")
+    end
   
-  #   # Read the file
-  #   gradle_contents = File.read(build_gradle_file)
+    # Read the file
+    gradle_contents = File.read(build_gradle_file)
   
-  #   # Find the versionCode line and increment it
-  #   new_gradle_contents = gradle_contents.gsub(/versionCode (\d+)/) do |match|
-  #     current_version = match.split.last.to_i
-  #     "versionCode #{current_version + 1}"
-  #   end
+    # Find the versionCode line and increment it
+    new_gradle_contents = gradle_contents.gsub(/versionCode (\d+)/) do |match|
+      current_version = match.split.last.to_i
+      "versionCode #{current_version + 1}"
+    end
   
-  #   # Write the updated content back to the file
-  #   File.write(build_gradle_file, new_gradle_contents)
+    # Write the updated content back to the file
+    File.write(build_gradle_file, new_gradle_contents)
   
-  #   UI.success("✅ Android versionCode incremented successfully!")
-  # end
-
-
+    UI.success("✅ Android versionCode incremented successfully!")
+  end
 
   desc "Deploy a new version to the Google Play"
   lane :deploy do

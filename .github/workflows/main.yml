@@ -45,11 +45,10 @@ jobs:
       - name: Run ESLint
         run: npm run lint:fix
 
-      # Debugging step
       - name: Debug CI Context
         run: |
           pwd
-          cat android/fastlane/playstore-credentials.json || echo "❌ Credentials file not found"
+          cat android/fastlane/playstore-credentials.json || echo "❌ Credentials File Not Found!"
           ls android/app/ | grep keystore || echo "❌ Keystore not found"
           ls -R android
 
@@ -119,8 +118,8 @@ jobs:
           ls -la android/
           ls -la android/fastlane/
           ls -la android/app/
-          cat android/fastlane/playstore-credentials.json || echo "❌ Credentials File Not Found!"
           cat android/app/my-upload-key.keystore || echo "❌ Keystore Not Found!"
+        # cat android/fastlane/playstore-credentials.json || echo "❌ Credentials File Not Found!"
 
       # 📦 Install Fastlane
       - name: Install Fastlane
