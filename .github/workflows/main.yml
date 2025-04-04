@@ -131,7 +131,7 @@ jobs:
       # For the play-store, required keystore file must be added to the GitHub secrets
       - name: Restore Keystore File
         run: |
-          echo "${{ secrets.KEYSTORE_FILE }}" | base64 --decode > android/app/my-upload-key.keystore
+          echo "${{ secrets.PLAYSTORE_CREDENTIALS }}" | base64 --decode > android/playstore-credentials.json
 
       - name: Debug CI Context
         run: |
