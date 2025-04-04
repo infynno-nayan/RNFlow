@@ -18,21 +18,26 @@ default_platform(:android)
 platform :android do
   desc "Deploy app on draft mode to the Play Store"
   lane :playstore do
-    # Increment version code
+    sh "pwd"  # 👈 Prints current working directory
+    sh "ls -la android/fastlane/"  # 👈 Lists all files in android/fastlane/
+    sh "cat android/fastlane/playstore-credentials.json || echo '❌ Credentials File Not Found!'"  # 👈 Verifies file content
+    
     increment_android_version_code
-
+  
     gradle(
       task: 'bundle',
       build_type: 'Release'
     )
-    
+  
     upload_to_play_store(
       track: 'internal',
       release_status: 'draft',
-      skip_upload_apk: true
+      skip_upload_apk: true,
+      json_key: 'android/fastlane/playstore-credentials.json' # ✅ Ensure correct path
     )
-     
   end
+
+
 
   private_lane :increment_android_version_code do
     build_gradle_file = File.join(Dir.pwd, "../app/build.gradle")
