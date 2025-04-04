@@ -1,74 +1,67 @@
-# Fastlane Configuration
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
 default_platform(:android)
 
 platform :android do
-  desc "Deploy app to Google Play Store (Draft Mode)"
+  desc "Deploy app on draft mode to the Play Store"
   lane :playstore do
-    # Ensure Play Store credentials exist
-    json_key_path = "android/fastlane/playstore-credentials.json"
-    unless File.exist?(json_key_path)
-      UI.user_error!("🚨 Google Play JSON Key missing! Expected at: #{json_key_path}")
-    end
-
-    # Ensure Keystore file exists
-    keystore_path = "android/app/my-upload-key.keystore"
-    unless File.exist?(keystore_path)
-      UI.user_error!("🚨 Keystore file missing! Expected at: #{keystore_path}")
-    end
-
-    # Increment version code before building
+    # Increment version code
     increment_android_version_code
 
-    # Ensure Gradle is executable
-    sh "chmod +x ./gradlew"
-
-    # Build the app (AAB)
     gradle(
-      task: "bundle",
-      build_type: "Release"
+      task: 'bundle',
+      build_type: 'Release'
     )
-
-    # Upload to Play Store (Internal Track)
+    
     upload_to_play_store(
-      track: "internal",
-      release_status: "draft",
-      skip_upload_apk: true,
-      json_key: json_key_path
+      track: 'internal',
+      release_status: 'draft',
+      skip_upload_apk: true
     )
+     
   end
 
   private_lane :increment_android_version_code do
-    build_gradle_file = "android/app/build.gradle"
-
+    build_gradle_file = File.join(Dir.pwd, "../app/build.gradle")
+  
     unless File.exist?(build_gradle_file)
       UI.user_error!("🚨 build.gradle file not found at: #{build_gradle_file}")
     end
-
-    # Read build.gradle
+  
+    # Read the file
     gradle_contents = File.read(build_gradle_file)
-
-    # Find versionCode and increment it
+  
+    # Find the versionCode line and increment it
     new_gradle_contents = gradle_contents.gsub(/versionCode (\d+)/) do |match|
       current_version = match.split.last.to_i
       "versionCode #{current_version + 1}"
     end
-
-    # Save the updated file
+  
+    # Write the updated content back to the file
     File.write(build_gradle_file, new_gradle_contents)
-
+  
     UI.success("✅ Android versionCode incremented successfully!")
   end
 
-  desc "Deploy new version to Google Play"
-  lane :deploy do
-    gradle(
-      task: "bundle",
-      build_type: "Release"
-    )
 
-    upload_to_play_store(
-      track: "production",
-      json_key: "android/fastlane/playstore-credentials.json"
-    )
+
+  desc "Deploy a new version to the Google Play"
+  lane :deploy do
+    gradle(task: "clean assembleRelease")
+    upload_to_play_store
   end
 end
+
