@@ -29,7 +29,24 @@ platform :android do
     )
   
     upload_to_play_store(
-      track: 'closed',
+      track: 'beta',
+      release_status: 'completed',
+      skip_upload_apk: true,
+      json_key: './fastlane/playstore-credentials.json'
+    )
+  end
+
+  desc "Deploy app on open testing to the Play Store"
+  lane :open do
+    # increment_android_version_code
+  
+    gradle(
+      task: 'bundle',
+      build_type: 'Release'
+    )
+  
+    upload_to_play_store(
+      track: 'alpha',
       release_status: 'completed',
       skip_upload_apk: true,
       json_key: './fastlane/playstore-credentials.json'
